@@ -11,7 +11,7 @@ class Urls():
 
 
     def __str__(self) -> str:
-        "URL Module"
+        return "URL Module"
 
 
     def scan(self):
