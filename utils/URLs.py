@@ -36,9 +36,12 @@ class Urls():
         return self.ReScanResponse # In order to check the response you should use .text
 
 
-    def report(self):
-        # First we get the ID from the scan's response output
-        self.id = json.loads(self.ScanResponse.text)['data']['id']
+    def report(self, FirstScan=True):
+        if FirstScan:
+            # First we get the ID from the scan's response output
+            self.id = json.loads(self.ScanResponse.text)['data']['id']
+        else:
+            self.id = json.loads(self.ReScanResponse.text)['data']['id']
         self.id = base64.urlsafe_b64encode("self.id".encode()).decode().strip("=")
         reportURL = f"{self.MainURL}/{self.id}"
         print(reportURL)
