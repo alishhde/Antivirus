@@ -1,4 +1,4 @@
-from src import BrowserGenerator, Files, URLs
+from src import BrowserGenerator, Files, URLs, USBDetector
 from time import sleep
 import os.path
 import os 
@@ -10,9 +10,20 @@ class main():
     def __str__(self) -> str:
         pass
     
+    def runProgram(self):
+        devicedetector = USBDetector.DeviceDetector()
+        devicedetector.newDeviceDetector()  
+
+        while True:
+            # sleep(1)
+            print('Running. . . .')
+            newDrives = devicedetector.newDeviceDetector()
+            if len(newDrives) > 0:
+                self.ScanFiles(FilesPATH=newDrives, Drive=True)
+
     def ScanWebsite(self):
         browser = BrowserGenerator.SafeBrowse('firefox') # We run and open firefox as our browser other options:'chrome'/'zope.testbrowser'
-        
+
         #### Open google.com in the Tab
         browser.startBrowing()
         #### A tab with google.com must be opened till here
@@ -39,26 +50,12 @@ class main():
 
                 ######## URL scan completed and showed in terminal
 
-    def ScanFiles(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB')):
+    def ScanFiles(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB'), Drive=False):
+        if Drive:
+            FilesPATH = f'{FilesPATH[0]}:\\img'
+            print("This directory added and must scan", FilesPATH)
 
-        ### Reading the Asked Directory for any files and folders
-        folders = []
-        files = []
-        for entry in os.scandir(FilesPATH):
-            if entry.is_dir():
-                folders.append(entry.path)
-            elif entry.is_file():
-                files.append(entry.path)
-        print('Folders:')
-        for i in range(len(folders)):
-            print("\t", folders[i])
-            sleep(.05)
-        print('Files:')
-        for i in range(len(files)):
-            print("\t", files[i])
-            sleep(.05)
-        ### Reading the Asked Directory for any files and folders
-        
+        files, folders = self.fileFolderFinder(FilesPATH)
 
         ### Size Calculation for every file
         ConversionDictionary = {'byte': 1, 'kb': 1024, 'mb':1024**2, 'gb':1024**3, 'tb':1024**4}
@@ -77,7 +74,7 @@ class main():
             filesize = int(file_size[0]) * ConversionDictionary[file_size[1].lower()]
             if maxsize < filesize:
                 # Ignore
-                print(f'This {filepath} file Ignored!')
+                print(f'This {filepath} file Ignored!\n')
                 ...
             else:
                 # break
@@ -97,8 +94,29 @@ class main():
                 print("Reported!", "\n")
 
 
+    def fileFolderFinder(self, FilesPATH):
+        ### Reading the Asked Directory for any files and folders
+        folders = []
+        files = []
+        for entry in os.scandir(FilesPATH):
+            if entry.is_dir():
+                folders.append(entry.path)
+            elif entry.is_file():
+                files.append(entry.path)
+        print('Folders:')
+        for i in range(len(folders)):
+            print("\t", folders[i])
+            sleep(.05)
+        print('Files:')
+        for i in range(len(files)):
+            print("\t", files[i])
+            sleep(.05)
+        ### Reading the Asked Directory for any files and folders
+        return files, folders
+
 
 if __name__ == '__main__':
     mainObject = main()
     # mainObject.ScanWebsite()
-    mainObject.ScanFiles(FilesPATH='DocToScan', MAX_SIZE=(1.2, 'MB'))
+    # mainObject.ScanFiles(FilesPATH='DocToScan', MAX_SIZE=(1.2, 'MB'))
+    mainObject.runProgram()
