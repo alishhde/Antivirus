@@ -42,19 +42,3 @@ class Files():
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha256_hash.update(byte_block)
         return sha256_hash.hexdigest()
-        
-
-
-# ########################## Start ##########################
-# fileObject = Files('DocToScan\\IoTArticle1.pdf', '51bd951cd29384782a40f883531b182a06adb725331ea8c38b7b1f00e45826ca')
-# # 51bd951cd29384782a40f883531b182a06adb725331ea8c38b7b1f00e45826ca
-
-# print("Scanning File....")
-# ScanResponse = fileObject.scanUpload()
-# ScanResponseText = ScanResponse.text # Turn response to text in order to show in output
-# print(ScanResponseText)
-# print("Scanning File finished!", "\n")
-
-# print("Reporting!")
-# print(fileObject.report().text)
-# print("Reported!", "\n")
