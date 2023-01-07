@@ -1,4 +1,4 @@
-from .utils import Browser, Files, URLs
+from src import BrowserGenerator, Files, URLs
 from time import sleep
 
 class main():
@@ -8,17 +8,19 @@ class main():
     def __str__(self) -> str:
         pass
     
-    def ScanWebsite():
-        browser = Browser.SafeBrowse('firefox') # We open firefox as our browser other options:'chrome'/'zope.testbrowser'
+    def ScanWebsite(self):
+        browser = BrowserGenerator.SafeBrowse('firefox') # We run and open firefox as our browser other options:'chrome'/'zope.testbrowser'
         
-        #### Run and open google.com in the Tab
-        browser.runBrowser()
+        #### Open google.com in the Tab
         browser.startBrowing()
         #### A tab with google.com must be opened till here
         while True:
-            if browser.currentURL_is != browser.previousurl:
-                print("Current URL is: ", browser.currentURL_is, "\n")
-                currenturl = browser.currentURL_is # Here we have the current URL
+            print("Previous URL was: ", browser.previousurl)
+            print("Current URL is: ", browser.currentURL_is(), "\n")
+            sleep(2.5)
+
+            if browser.currentURL_is() != browser.previousurl:
+                currenturl = browser.currentURL_is() # Here we have the current URL
                 browser.previousurl = currenturl 
 
                 ######## Scan the URL and show it in output
