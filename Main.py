@@ -99,12 +99,6 @@ class main():
                     print("Reporting!")
                     # print(fileObject.report().text)
                     print("Reported!", "\n")
-                    
-        # def recursionCheckingFolders():
-        #     for folder in self.folders:
-        #         print("\#\#\#\#\# Looking for folders ...")
-        #         self.files, self.folders = self.fileFolderFinder(folder)
-        #         print("\#\#\#\#\# Looking for folders DONE.")
 
         checkFile_flag = True
         CheckFolder_flag = True
@@ -116,17 +110,14 @@ class main():
         if len(self.folders) > 0:
             for folder in self.folders:
                 print(f"We are checking '{folder}' folder!")
-                self.ScanForFilesFolders(FilesPATH=folder)
+                self.ScanForFilesFolders(FilesPATH=folder) ## Recursion starts here
             CheckFolder_flag = False
             print('Folder finisheddddd\n\n')
 
         if not(CheckFolder_flag):
-            print("This directory checked completely!")
-
-                
+            print("This directory checked completely!") ## Recursion finishes here           
                                    
         
-
     def fileFolderFinder(self, FilesPATH):
         ### Reading the Asked Directory for any files and folders
         folders = []

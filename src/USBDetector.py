@@ -43,8 +43,3 @@ class DeviceDetector():
                     print ("The drives remove: %s." % (drive))
                     return list(drive)
             return []
-                    
-# if __name__ == '__main__':
-#     devicedetector = DeviceDetector()
-#     while True:
-#         devicedetector.newDeviceDetector()  
