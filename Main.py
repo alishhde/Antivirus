@@ -1,5 +1,7 @@
 from src import BrowserGenerator, Files, URLs
 from time import sleep
+import os.path
+import os 
 
 class main():
     def __init__(self) -> None:
@@ -15,10 +17,6 @@ class main():
         browser.startBrowing()
         #### A tab with google.com must be opened till here
         while True:
-            print("Previous URL was: ", browser.previousurl)
-            print("Current URL is: ", browser.currentURL_is(), "\n")
-            sleep(2.5)
-
             if browser.currentURL_is() != browser.previousurl:
                 currenturl = browser.currentURL_is() # Here we have the current URL
                 browser.previousurl = currenturl 
@@ -41,6 +39,66 @@ class main():
 
                 ######## URL scan completed and showed in terminal
 
+    def ScanFiles(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB')):
+
+        ### Reading the Asked Directory for any files and folders
+        folders = []
+        files = []
+        for entry in os.scandir(FilesPATH):
+            if entry.is_dir():
+                folders.append(entry.path)
+            elif entry.is_file():
+                files.append(entry.path)
+        print('Folders:')
+        for i in range(len(folders)):
+            print("\t", folders[i])
+            sleep(.05)
+        print('Files:')
+        for i in range(len(files)):
+            print("\t", files[i])
+            sleep(.05)
+        ### Reading the Asked Directory for any files and folders
+        
+
+        ### Size Calculation for every file
+        ConversionDictionary = {'byte': 1, 'kb': 1024, 'mb':1024**2, 'gb':1024**3, 'tb':1024**4}
+        maxsize = MAX_SIZE[0] * ConversionDictionary[MAX_SIZE[1].lower()]
+        for filepath in files:
+            # Get the size of the file
+            file_size = float(os.path.getsize(f'{filepath}'))
+            for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
+                if file_size < 1024.0:
+                    file_size = (float("%3.1f" % file_size), x)
+                    break
+                file_size /= 1024.0
+            # print(file_size)
+
+            ## Ignoring files greater than 5 MG (Default Value)
+            filesize = int(file_size[0]) * ConversionDictionary[file_size[1].lower()]
+            if maxsize < filesize:
+                # Ignore
+                print(f'This {filepath} file Ignored!')
+                ...
+            else:
+                # break
+                # Scan the File
+                fileObject = Files.Files(f'{filepath}', '51bd951cd29384782a40f883531b182a06adb725331ea8c38b7b1f00e45826ca')
+                
+                ### Scan the file
+                print(f"Scanning {filepath} File....")
+                ScanResponse = fileObject.scanUpload()
+                ScanResponseText = ScanResponse.text # Turn response to text in order to show in output
+                print(ScanResponseText)
+                print("Scanning File finished!", "\n")
+
+                ### Report the scanned file
+                print("Reporting!")
+                print(fileObject.report().text)
+                print("Reported!", "\n")
+
+
+
 if __name__ == '__main__':
     mainObject = main()
-    mainObject.ScanWebsite()
+    # mainObject.ScanWebsite()
+    mainObject.ScanFiles(FilesPATH='DocToScan', MAX_SIZE=(1.2, 'MB'))

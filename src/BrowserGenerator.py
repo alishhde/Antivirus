@@ -18,4 +18,3 @@ class SafeBrowse():
 
     def reloadCurrentPage(self):
         self.browser.reload()
-
