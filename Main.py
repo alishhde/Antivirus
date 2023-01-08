@@ -2,6 +2,9 @@ from src import BrowserGenerator, Files, URLs, USBDetector
 from time import sleep
 import os.path
 import os 
+from multiprocessing import Process
+from colorama import init, Fore, Back, Style
+init()
 
 class main():
     def __init__(self) -> None:
@@ -10,24 +13,83 @@ class main():
     def __str__(self) -> str:
         pass
     
-    def runProgram(self):
-        devicedetector = USBDetector.DeviceDetector()
-        devicedetector.newDeviceDetector()  
+    def cprint(self, msg, foreground="black", background="white"):
+        """
+            Help you to Change the output color
+            First part is the message which will be shown in output
+            Second part is the font color
+            Third part is the background color
+        """
+        fground = foreground.upper()
+        bground = background.upper()
+        style = getattr(Fore, fground) + getattr(Back, bground)
+        print(style + msg + Style.RESET_ALL)
 
+
+    def usb(self):
+        if self.firstTimeFlag:
+            print('Waiting 5seconds')
+            sleep(5)
+            self.firstTimeFlag = False
         while True:
-            # sleep(1)
-            print('Running. . . .')
-            newDrives = devicedetector.newDeviceDetector()
+            print('running!!')
+            newDrives = self.devicedetector.newDeviceDetector()
             if len(newDrives) > 0:
                 self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
-            # self.ScanForFilesFolders()
+
+    def runProgram(self):
+        self.devicedetector = USBDetector.DeviceDetector()
+        self.firstTimeFlag = True
+        Process(target=self.usb).start()        
 
 
-    def ScanWebsite(self):
-        browser = BrowserGenerator.SafeBrowse('firefox') # We run and open firefox as our browser other options:'chrome'/'zope.testbrowser'
+        while True:
+            # Menu
+            print("Menu:\n\t",
+                " 1. SafeBrowser\n\t",
+                " 2. Scan\n\t",
+                " 3. USB\n\t",
+                )
+            num = input("Enter your command: ")
 
+            if num == '1' or num.lower() == 'safebrowser':
+                browserName = input("Please enter the name of the browser: chrome - firefox\n\t").lower()
+                if browserName not in ['chrome', 'firefox']:
+                    self.cprint(f"\tWe don't currently have '{browserName}' browser. Try again!", "red", "black")
+                    continue
+                browser = BrowserGenerator.SafeBrowse(browserName) # We run and open firefox as our browser other options:'chrome'/'zope.testbrowser'
+                try:
+                    self.ScanWebsite(browser)
+                except:
+                    self.cprint("\tBrowser Stopped by user. Continue", "red", "black")
+                    continue
+
+            elif num == '2' or num.lower() == 'scan':
+                path = input("Please enter the path for scanning: ")
+                num, typ = 5, 'mb'
+                if input('Do you want to scan specific files with specific size? y/n\t') == 'y':
+                    num, typ = input("Enter your limitation (e.g. '5,MB' for files less the 5 megabytes): ").split(',')
+                    print(num, typ )
+                    if typ not in ['byte', 'kb', 'mb', 'gb', 'tb']:
+                        self.cprint("\tYou Entered wrong type! Try again ", "red", "black")
+                        continue
+                WrongPath_Flag = self.ScanForFilesFolders(FilesPATH=path, MAX_SIZE=(int(num), typ))
+                if WrongPath_Flag:
+                    self.cprint("\tYou Entered wrong Path! Try again ", "red", "black")
+                    continue
+            
+            elif num == '3' or num.lower() == 'usb':
+                path = print("Waiting for new device to inser..")
+                while True:
+                    newDrives = devicedetector.newDeviceDetector()
+                    if len(newDrives) > 0:
+                        self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
+
+
+    def ScanWebsite(self, browser):
         #### Open google.com in the Tab
         browser.startBrowing()
+
         #### A tab with google.com must be opened till here
         while True:
             if browser.currentURL_is() != browser.previousurl:
@@ -35,10 +97,11 @@ class main():
                 browser.previousurl = currenturl 
 
                 ######## Scan the URL and show it in output
+                print(f'We are scanning {currenturl} URL')
                 urlObject = URLs.Urls(currenturl, "51bd951cd29384782a40f883531b182a06adb725331ea8c38b7b1f00e45826ca")
                 
                 ## URL scanning starts here
-                print("Scanning....")
+                print("URL Scanning....")
                 ScanResponse = urlObject.scan()
                 ScanResponseText = ScanResponse.text # Turn response to text in order to show in output
                 print(ScanResponseText)
@@ -49,7 +112,6 @@ class main():
                 print(urlObject.report().text)
                 print("Reported!", "\n")
                 ## Getting report information finishes here
-
                 ######## URL scan completed and showed in terminal
 
     def ScanForFilesFolders(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB'), Drive=False):
@@ -59,6 +121,8 @@ class main():
 
         self.files, self.folders = self.fileFolderFinder(FilesPATH) 
         ## self.files consists of a paths to files existing in that given path(Directory), self.folders Directory existing in the given directory 
+        if (self.files, self.folders) == (0, 0):
+            return True
         print('This is self.files: ', self.files, '\nThis is self.folders: ', self.folders, '\n\n')
         
         ### Size Calculation for every file
@@ -97,7 +161,7 @@ class main():
 
                     ### Report the scanned file
                     print("Reporting!")
-                    # print(fileObject.report().text)
+                    print(fileObject.report().text)
                     print("Reported!", "\n")
 
         checkFile_flag = True
@@ -116,31 +180,39 @@ class main():
 
         if not(CheckFolder_flag):
             print("This directory checked completely!") ## Recursion finishes here           
-                                   
+
+
+    
+
         
     def fileFolderFinder(self, FilesPATH):
         ### Reading the Asked Directory for any files and folders
         folders = []
         files = []
-        for entry in os.scandir(FilesPATH):
-            if entry.is_dir():
-                folders.append(entry.path)
-            elif entry.is_file():
-                files.append(entry.path)
-        print('Folders:')
-        for i in range(len(folders)):
-            print("\t", folders[i])
-            sleep(.05)
-        print('Files:')
-        for i in range(len(files)):
-            print("\t", files[i])
-            sleep(.05)
-        ### Reading the Asked Directory for any files and folders
-        return files, folders
+        try:
+            for entry in os.scandir(FilesPATH):
+                if entry.is_dir():
+                    folders.append(entry.path)
+                elif entry.is_file():
+                    files.append(entry.path)
+            self.cprint('Folders:')
+            for i in range(len(folders)):
+                print("\t", folders[i])
+                sleep(.05)
+            self.cprint('Files:')
+            for i in range(len(files)):
+                print("\t", files[i])
+                sleep(.05)
+            ### Reading the Asked Directory for any files and folders
+            return files, folders
+        except FileNotFoundError:
+            self.cprint("\tPath doesn't Exist!", "red", "black")
+            return 0, 0
+        except:
+            self.cprint("\Error detected!", "red", "black")
+            return 0, 0
 
 
 if __name__ == '__main__':
     mainObject = main()
-    # mainObject.ScanWebsite()
-    # mainObject.ScanForFilesFolders(FilesPATH='DocToScan', MAX_SIZE=(1.2, 'MB'))
     mainObject.runProgram()

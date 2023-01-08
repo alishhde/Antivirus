@@ -51,31 +51,3 @@ class Urls():
         }
         self.ReportResponse = requests.get(reportURL, headers=headers)
         return self.ReportResponse # In order to check the response you should use .text
-
-
-
-########################## Start ##########################
-# urlObject = Urls('https://www.google.com/', '51bd951cd29384782a40f883531b182a06adb725331ea8c38b7b1f00e45826ca')
-
-# print("Scanning....")
-# ScanResponse = urlObject.scan()
-# ScanResponseText = ScanResponse.text # Turn response to text in order to show in output
-# print(ScanResponseText)
-# print("Scanning finished!", "\n")
-
-# # Turn text to json to access the parameteres 
-# print("Converting to JSON!", "\n")
-# ScanResponseTextJSON = json.loads(ScanResponseText)
-# print(ScanResponseTextJSON) 
-# print(ScanResponseTextJSON['data']['id']) # Access a special data from JSON
-# print("Converted to JSON!", "\n")
-
-
-# print("Reporting!")
-# print(urlObject.report().text)
-# print("Reported!", "\n")
-
-
-# print("Rescanning!")
-# print(urlObject.rescan().text)
-# print("Rescan finished!", "\n")

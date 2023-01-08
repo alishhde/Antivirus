@@ -27,7 +27,7 @@ class DeviceDetector():
 
     def newDeviceDetector(self):
             original = set(self.get_driveStatus())
-            print ('Detecting...')
+            print ('\nDetecting...\n')
             time.sleep(3)
             add_device =  set(self.get_driveStatus()) - original
             subt_device = original - set(self.get_driveStatus())
