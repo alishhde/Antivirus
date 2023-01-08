@@ -27,19 +27,19 @@ class DeviceDetector():
 
     def newDeviceDetector(self):
             original = set(self.get_driveStatus())
-            print ('\nDetecting...\n')
+            # print ('\nDetecting...\n')
             time.sleep(3)
             add_device =  set(self.get_driveStatus()) - original
             subt_device = original - set(self.get_driveStatus())
 
             if (len(add_device)):
-                print ("There were %d"% (len(add_device)))
+                print ("\n\nThere were %d\n" % (len(add_device)))
                 for drive in add_device:
-                    print ("The drives added: %s." % (drive))
+                    print ("The drives added: %s\n" % (drive))
                     return list(drive)
             elif(len(subt_device)):
-                print ("There were %d"% (len(subt_device)))
+                print ("\n\nThere were %d\n" % (len(subt_device)))
                 for drive in subt_device:
-                    print ("The drives remove: %s." % (drive))
+                    print ("The drives remove: %s\n" % (drive))
                     return list(drive)
             return []

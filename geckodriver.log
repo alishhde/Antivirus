@@ -199,3 +199,14 @@ WebDriver BiDi listening on ws://127.0.0.1:9592
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofilefGqjKl\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:9592/devtools/browser/130e45f9-c2f5-4a04-8075-48f6807aba35
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
+1673140172503	geckodriver	INFO	Listening on 127.0.0.1:9707
+1673140175573	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "9708" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileuEGxei"
+1673140175959	Marionette	INFO	Marionette enabled
+1673140175966	Marionette	INFO	Listening on port 9718
+Read port: 9718
+WebDriver BiDi listening on ws://127.0.0.1:9708
+1673140176082	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileuEGxei\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:9708/devtools/browser/931e44ac-ed72-4b11-a1d2-446608744921
+1673140196905	Marionette	INFO	Stopped listening on port 9718
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.

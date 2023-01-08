@@ -2,6 +2,7 @@ from src import BrowserGenerator, Files, URLs, USBDetector
 from time import sleep
 import os.path
 import os 
+import csv
 from multiprocessing import Process
 from colorama import init, Fore, Back, Style
 init()
@@ -25,17 +26,9 @@ class main():
         style = getattr(Fore, fground) + getattr(Back, bground)
         print(style + msg + Style.RESET_ALL)
 
+    def saveIntoCSV(self):
+        ...
 
-    def usb(self):
-        if self.firstTimeFlag:
-            print('Waiting 5seconds')
-            sleep(5)
-            self.firstTimeFlag = False
-        while True:
-            print('running!!')
-            newDrives = self.devicedetector.newDeviceDetector()
-            if len(newDrives) > 0:
-                self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
 
     def runProgram(self):
         self.devicedetector = USBDetector.DeviceDetector()
@@ -48,7 +41,7 @@ class main():
             print("Menu:\n\t",
                 " 1. SafeBrowser\n\t",
                 " 2. Scan\n\t",
-                " 3. USB\n\t",
+                # " 3. USB\n\t",
                 )
             num = input("Enter your command: ")
 
@@ -78,12 +71,12 @@ class main():
                     self.cprint("\tYou Entered wrong Path! Try again ", "red", "black")
                     continue
             
-            elif num == '3' or num.lower() == 'usb':
-                path = print("Waiting for new device to inser..")
-                while True:
-                    newDrives = devicedetector.newDeviceDetector()
-                    if len(newDrives) > 0:
-                        self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
+            # elif num == '3' or num.lower() == 'usb':
+            #     path = print("Waiting for new device to inser..")
+            #     while True:
+            #         newDrives = self.devicedetector.newDeviceDetector()
+            #         if len(newDrives) > 0:
+            #             self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
 
 
     def ScanWebsite(self, browser):
@@ -109,7 +102,7 @@ class main():
                 ## URL scanning finishes here
                 ## Getting report information starts here
                 print("Reporting!")
-                print(urlObject.report().text)
+                # print(urlObject.report().text)
                 print("Reported!", "\n")
                 ## Getting report information finishes here
                 ######## URL scan completed and showed in terminal
@@ -161,7 +154,7 @@ class main():
 
                     ### Report the scanned file
                     print("Reporting!")
-                    print(fileObject.report().text)
+                    # print(fileObject.report().text)
                     print("Reported!", "\n")
 
         checkFile_flag = True
@@ -182,7 +175,14 @@ class main():
             print("This directory checked completely!") ## Recursion finishes here           
 
 
-    
+    def usb(self):
+        if self.firstTimeFlag:
+            sleep(5)
+            self.firstTimeFlag = False
+        while True:
+            newDrives = self.devicedetector.newDeviceDetector()
+            if len(newDrives) > 0:
+                self.ScanForFilesFolders(FilesPATH=newDrives, Drive=True)
 
         
     def fileFolderFinder(self, FilesPATH):
