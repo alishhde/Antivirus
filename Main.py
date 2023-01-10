@@ -3,6 +3,7 @@ from time import sleep
 import os.path
 import os 
 import csv
+import json
 from multiprocessing import Process
 from colorama import init, Fore, Back, Style
 init()
@@ -25,9 +26,6 @@ class main():
         bground = background.upper()
         style = getattr(Fore, fground) + getattr(Back, bground)
         print(style + msg + Style.RESET_ALL)
-
-    def saveIntoCSV(self):
-        ...
 
 
     def runProgram(self):
@@ -102,11 +100,66 @@ class main():
                 ## URL scanning finishes here
                 ## Getting report information starts here
                 print("Reporting!")
-                # print(urlObject.report().text)
+                print(urlObject.report().text)
+                self.urlReportJSON = json.loads(urlObject.report().text)
+                self.saveReportIntoCSV(URL=True)
                 print("Reported!", "\n")
                 ## Getting report information finishes here
                 ######## URL scan completed and showed in terminal
 
+    def saveReportIntoCSV(self, URL=False, File=False):
+        if URL:
+            Total_harmless = self.urlReportJSON['data']['attributes']['total_votes']['harmless'] # Value
+            Total_malicious = self.urlReportJSON['data']['attributes']['total_votes']['malicious'] # Value
+            Threat_names = self.urlReportJSON['data']['attributes']['threat_names'] # List "threat_names": [],
+            Last_HTTP_Response_Headers = self.urlReportJSON['data']['attributes']['last_http_response_headers'] # Dict (key:value)
+            """ "last_http_response_headers": {
+                "Permissions-Policy": "interest-cohort=()",
+                "X-Powered-By": "Next.js",
+                "Transfer-Encoding": "chunked",
+                "Age": "0",
+                "Strict-Transport-Security": "max-age=63072000",
+                "Server": "Vercel",
+                "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+                "Connection": "keep-alive",
+                "X-Vercel-Cache": "MISS",
+                "X-Matched-Path": "/",
+                "Date": "Sat, 07 Jan 2023 00:10:27 GMT",
+                "Content-Type": "text/html; charset=utf-8",
+                "Content-Encoding": "gzip",
+                "X-Vercel-Id": "cle1::iad1::l99zl-1673050226959-3bbe0dea600a"
+            }, """
+            
+            last_http_response_content_sha256 = self.urlReportJSON['data']['attributes']['last_http_response_content_sha256'] # Value
+            """ "last_http_response_content_sha256": "9025020ae038d7aab57e63f081dd1974c7632cc13d7121b4ea49d56088754a54" """
+            
+            last_analysis_stats = self.urlReportJSON['data']['attributes']['last_analysis_stats'] # Dict
+            """ "last_analysis_stats": {
+                "harmless": 77,
+                "malicious": 0,
+                "suspicious": 0,
+                "undetected": 13,
+                "timeout": 0
+            }, """
+            
+            last_analysis_stats = self.urlReportJSON['data']['attributes']['last_analysis_results'] # Dict
+            """ Consists of more than 70 check scanned with various antivirus """
+            Listof_last_analysis_stats_KEYs = list(dict(last_analysis_stats).keys())
+            print('he11')
+            with open('ScanReport\\URLs\\lastanalysisSTATs.csv', 'w', encoding='UTF8', newline='') as file:
+                print('doneee!')
+                writer = csv.DictWriter(file, fieldnames=['category', 'result', 'method', 'engin_name']) # Header
+                writer.writeheader()
+
+                rows = [last_analysis_stats[key] for key in Listof_last_analysis_stats_KEYs]
+                print('This is rows \n\n')
+                print(rows, '\n\n')
+                writer.writerows(rows)
+            print('done!')
+            
+        if File:
+            pass
+    
     def ScanForFilesFolders(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB'), Drive=False):
         if Drive:
             FilesPATH = f'{FilesPATH[0]}:\\img'
