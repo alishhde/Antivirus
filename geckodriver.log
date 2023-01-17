@@ -391,3 +391,46 @@ DevTools listening on ws://127.0.0.1:7840/devtools/browser/432c88a4-2b7a-4161-9a
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
 JavaScript warning: https://accounts.google.com/signup/v2?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp line 2 > eval line 6498 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1673981020835	geckodriver	INFO	Listening on 127.0.0.1:6430
+1673981023869	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "6431" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofile6D0jcc"
+1673981024307	Marionette	INFO	Marionette enabled
+1673981024315	Marionette	INFO	Listening on port 6443
+Read port: 6443
+WebDriver BiDi listening on ws://127.0.0.1:6431
+1673981024454	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofile6D0jcc\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:6431/devtools/browser/81d141d2-3c5c-482f-963d-8c4ab12b2379
+1673981615860	geckodriver	INFO	Listening on 127.0.0.1:6806
+1673981618925	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "6807" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileC1S76I"
+1673981619310	Marionette	INFO	Marionette enabled
+1673981619316	Marionette	INFO	Listening on port 6816
+Read port: 6816
+WebDriver BiDi listening on ws://127.0.0.1:6807
+1673981619445	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileC1S76I\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:6807/devtools/browser/f1b843b1-6ed7-4531-8b1e-aa9df4568876
+1673982481555	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1673982488198	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1673982492456	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/OU_aD-3-G2pcaJqwlUagl315JVS_daCE4k47Wxj7Xso.js line 2 > eval line 4342 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1673982868550	geckodriver	INFO	Listening on 127.0.0.1:7200
+1673982871592	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "7201" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofile6xKKSp"
+1673982871977	Marionette	INFO	Marionette enabled
+1673982871982	Marionette	INFO	Listening on port 7210
+Read port: 7210
+WebDriver BiDi listening on ws://127.0.0.1:7201
+1673982872106	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofile6xKKSp\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:7201/devtools/browser/3c504c55-23c7-49de-a424-503a19f285f3
+1673983177281	geckodriver	INFO	Listening on 127.0.0.1:7310
+1673983180326	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "7311" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileKYH7Qj"
+1673983180689	Marionette	INFO	Marionette enabled
+1673983180694	Marionette	INFO	Listening on port 7321
+Read port: 7321
+WebDriver BiDi listening on ws://127.0.0.1:7311
+1673983180846	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ALSHO\\AppData\\Local\\Temp\\rust_mozprofileKYH7Qj\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:7311/devtools/browser/f6b22aee-38fe-4270-bc5e-620ba25bf452
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+JavaScript error: https://www.javatpoint.com/how-to-create-a-dataframes-in-python, line 1798: TypeError: redirectButton is null
+JavaScript warning: https://pagead2.googlesyndication.com/bg/OU_aD-3-G2pcaJqwlUagl315JVS_daCE4k47Wxj7Xso.js line 2 > eval line 6216 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.

@@ -1,1 +1,91 @@
-category,result,method,engin_name
+engin_name,category,result,method
+Bkav,undetected,unrated,blacklist
+CMC Threat Intelligence,harmless,clean,blacklist
+Snort IP sample list,harmless,clean,blacklist
+VX Vault,harmless,clean,blacklist
+ViriBack,harmless,clean,blacklist
+Comodo Valkyrie Verdict,undetected,unrated,blacklist
+PhishLabs,undetected,unrated,blacklist
+K7AntiVirus,harmless,clean,blacklist
+CINS Army,harmless,clean,blacklist
+Quttera,harmless,clean,blacklist
+BlockList,harmless,clean,blacklist
+PrecisionSec,undetected,unrated,blacklist
+OpenPhish,harmless,clean,blacklist
+0xSI_f33d,undetected,unrated,blacklist
+Feodo Tracker,harmless,clean,blacklist
+Web Security Guard,harmless,clean,blacklist
+Scantitan,harmless,clean,blacklist
+AlienVault,harmless,clean,blacklist
+Sophos,harmless,clean,blacklist
+Phishtank,harmless,clean,blacklist
+CyberCrime,harmless,clean,blacklist
+Spam404,harmless,clean,blacklist
+SecureBrain,harmless,clean,blacklist
+Hoplite Industries,harmless,clean,blacklist
+CRDF,harmless,clean,blacklist
+Rising,harmless,clean,blacklist
+Fortinet,harmless,clean,blacklist
+alphaMountain.ai,harmless,clean,blacklist
+Lionic,harmless,clean,blacklist
+Cyble,harmless,clean,blacklist
+Seclookup,harmless,clean,blacklist
+Virusdie External Site Scan,harmless,clean,blacklist
+Artists Against 419,harmless,clean,blacklist
+Google Safebrowsing,harmless,clean,blacklist
+SafeToOpen,undetected,unrated,blacklist
+ADMINUSLabs,harmless,clean,blacklist
+ESTsecurity,harmless,clean,blacklist
+Juniper Networks,harmless,clean,blacklist
+Heimdal Security,harmless,clean,blacklist
+AutoShun,undetected,unrated,blacklist
+Trustwave,harmless,clean,blacklist
+AICC (MONITORAPP),harmless,clean,blacklist
+CyRadar,harmless,clean,blacklist
+Dr.Web,harmless,clean,blacklist
+Emsisoft,harmless,clean,blacklist
+Abusix,harmless,clean,blacklist
+Webroot,harmless,clean,blacklist
+Avira,harmless,clean,blacklist
+securolytics,harmless,clean,blacklist
+Antiy-AVL,harmless,clean,blacklist
+Acronis,harmless,clean,blacklist
+Quick Heal,harmless,clean,blacklist
+URLQuery,undetected,unrated,blacklist
+Viettel Threat Intelligence,harmless,clean,blacklist
+DNS8,harmless,clean,blacklist
+benkow.cc,harmless,clean,blacklist
+EmergingThreats,harmless,clean,blacklist
+Chong Lua Dao,harmless,clean,blacklist
+Yandex Safebrowsing,harmless,clean,blacklist
+Lumu,undetected,unrated,blacklist
+Kaspersky,harmless,clean,blacklist
+Sucuri SiteCheck,harmless,clean,blacklist
+desenmascara.me,harmless,clean,blacklist
+URLhaus,harmless,clean,blacklist
+PREBYTES,harmless,clean,blacklist
+StopForumSpam,harmless,clean,blacklist
+Blueliv,harmless,clean,blacklist
+Netcraft,undetected,unrated,blacklist
+ZeroCERT,harmless,clean,blacklist
+Phishing Database,harmless,clean,blacklist
+MalwarePatrol,harmless,clean,blacklist
+Sangfor,harmless,clean,blacklist
+IPsum,harmless,clean,blacklist
+Malwared,harmless,clean,blacklist
+BitDefender,harmless,clean,blacklist
+GreenSnow,harmless,clean,blacklist
+G-Data,harmless,clean,blacklist
+Cyan,undetected,unrated,blacklist
+VIPRE,undetected,unrated,blacklist
+SCUMWARE.org,harmless,clean,blacklist
+PhishFort,undetected,unrated,blacklist
+malwares.com URL checker,harmless,clean,blacklist
+Forcepoint ThreatSeeker,harmless,clean,blacklist
+Certego,harmless,clean,blacklist
+ESET,harmless,clean,blacklist
+Threatsourcing,harmless,clean,blacklist
+MalSilo,harmless,clean,blacklist
+Nucleon,harmless,clean,blacklist
+ThreatHive,harmless,clean,blacklist
+Bfore.Ai PreCrime,harmless,clean,blacklist

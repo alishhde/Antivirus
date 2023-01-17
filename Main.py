@@ -100,9 +100,9 @@ class main():
                 ## URL scanning finishes here
                 ## Getting report information starts here
                 print("Reporting!")
-                print(urlObject.report().text)
+                # print(urlObject.report().text)
                 self.urlReportJSON = json.loads(urlObject.report().text)
-                self.saveReportIntoCSV(URL=True)
+                self.saveReportIntoCSV(URL=True) ## Calliung Saving Function for saving URL data
                 print("Reported!", "\n")
                 ## Getting report information finishes here
                 ######## URL scan completed and showed in terminal
@@ -111,6 +111,7 @@ class main():
         if URL:
             Total_harmless = self.urlReportJSON['data']['attributes']['total_votes']['harmless'] # Value
             Total_malicious = self.urlReportJSON['data']['attributes']['total_votes']['malicious'] # Value
+
             Threat_names = self.urlReportJSON['data']['attributes']['threat_names'] # List "threat_names": [],
             Last_HTTP_Response_Headers = self.urlReportJSON['data']['attributes']['last_http_response_headers'] # Dict (key:value)
             """ "last_http_response_headers": {
@@ -143,19 +144,30 @@ class main():
             }, """
             
             last_analysis_stats = self.urlReportJSON['data']['attributes']['last_analysis_results'] # Dict
-            """ Consists of more than 70 check scanned with various antivirus """
-            Listof_last_analysis_stats_KEYs = list(dict(last_analysis_stats).keys())
-            print('he11')
-            with open('ScanReport\\URLs\\lastanalysisSTATs.csv', 'w', encoding='UTF8', newline='') as file:
-                print('doneee!')
-                writer = csv.DictWriter(file, fieldnames=['category', 'result', 'method', 'engin_name']) # Header
-                writer.writeheader()
+            last_analysis_stats = self.urlReportJSON['data']['attributes']['last_analysis_results'] # Dict
+            """ Consists of more than 70 check scanned with various antivirus. Each of them are a dictionary which key is the name of the method of scanning """
 
-                rows = [last_analysis_stats[key] for key in Listof_last_analysis_stats_KEYs]
-                print('This is rows \n\n')
-                print(rows, '\n\n')
-                writer.writerows(rows)
-            print('done!')
+            Listof_last_analysis_stats_KEYs = list(dict(last_analysis_stats).keys()) ## These keys are methods of scanning
+            
+            with open('ScanReport\\URLs\\lastanalysisSTATs.csv', 'w', encoding='UTF8', newline='') as file:
+                fieldnames=['engin_name', 'category', 'result', 'method']
+                writer = csv.writer(file) 
+
+                writer.writerow(fieldnames) # Header row
+
+                rows = [
+                    [last_analysis_stats[key]['engine_name'], last_analysis_stats[key]['category'], 
+                    last_analysis_stats[key]['result'], last_analysis_stats[key]['method']] 
+                    for key in Listof_last_analysis_stats_KEYs
+                    ]
+
+                ## Rows of data (scan results) are being saved
+                # print(rows, '\n\n')
+                for row in rows:
+                    writer.writerow(row)
+                ## Rows saved
+                
+            print('CSV file updated!')
             
         if File:
             pass
