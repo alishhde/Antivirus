@@ -174,7 +174,7 @@ class main():
     
     def ScanForFilesFolders(self, FilesPATH='DocToScan', MAX_SIZE=(5, 'MB'), Drive=False):
         if Drive:
-            FilesPATH = f'{FilesPATH[0]}:\\img'
+            FilesPATH = f'{FilesPATH[0]}:\\'
             print("This directory added and must scan", FilesPATH)
 
         self.files, self.folders = self.fileFolderFinder(FilesPATH) 
